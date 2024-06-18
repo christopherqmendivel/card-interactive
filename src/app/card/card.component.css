@@ -1,0 +1,52 @@
+/* CARDS */
+.card {
+  background-image: url(../../../public/assets/images/backgrounds/bg-main-mobile.png);
+  min-height: 20rem;
+  height: 24rem;
+  max-height: 25rem;
+  position: relative;
+  background-size: cover;
+}
+
+.card-back {
+  background-image: url(../../../public/assets/images/backgrounds/bg-card-back.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 4rem;
+  width: 75%;
+  height: 100%;
+  right: 2rem;
+}
+
+.card-front {
+  background-image: url(../../../public/assets/images/backgrounds/bg-card-front.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 2rem;
+  width: 75%;
+  height: 100%;
+  top: 13.5rem;
+}
+
+.card-logo {
+  width: 7rem;
+  margin-bottom: 3rem;
+}
+
+.data-card {
+  padding: 2rem;
+}
+
+.number-card {
+    letter-spacing: .3rem;
+}
+
+.name-expire {
+  padding-top: 2rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  display: flex;
+  justify-content: space-between;
+}

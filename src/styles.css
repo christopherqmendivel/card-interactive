@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --font-space-grotesk:    "Space Grotesk", sans-serif;
+    
+    /* Neutral Colors */
+    --white: hsl(0, 0%, 100%);
+    --dark-grayish-violet: hsl(279, 6%, 55%);
+    --very-dark-violet: hsl(278, 68%, 11%);
+    --light-grayish-violet: hsl(270, 3%, 87%); 
+}
+
+
+
+
+
+/* RESET STYLES */
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+    font-size: 1.8rem;
+    font-family: var(--font-space-grotesk);
+    color: var(--white);
+    font-weight: 500;
+}
+
+
+.interactive-card{
+    min-height: 100vh;
+    background-color: var(--white);
+}
+
