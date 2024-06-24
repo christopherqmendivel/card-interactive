@@ -1,1 +1,65 @@
-<p>form works!</p>
+  <div *ngIf="showForm">
+    <form [formGroup]="myForm" (ngSubmit)="onSave()">
+      <div class="form-group">
+        <label for="nombre" class="lbl">{{
+          "cardholder name" | uppercase
+        }}</label>
+        <input
+          type="text"
+          id="nombre"
+          formControlName="name"
+          class="card-name ipt"
+          placeholder="e.g. Christopher Quiroz"
+        />
+
+        <span *ngIf="isValidField('name')" class="text-danger">
+          {{ getFieldError("name") }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="card-number" class="lbl">{{
+          "card number" | uppercase
+        }}</label>
+        <input
+          type="text"
+          id="card-number"
+          formControlName="number"
+          class="card-number ipt"
+          placeholder="e.g. 1234 5678 9123 0000"
+        />
+
+        <span *ngIf="isValidField('number')" class="text-danger">
+          {{ getFieldError("number") }}
+        </span>
+      </div>
+
+      <button type="submit" class="btn">Confirm</button>
+    </form>
+  </div>
+
+  <div *ngIf="showThankYou" class="container-thank">
+    <img
+      src="/assets/images/icon-complete.svg"
+      alt="Icons Complete"
+      class="icon-complete"
+    />
+    <h2 class="title">{{ "thank you!" | uppercase }}</h2>
+    <p class="info">We've added your card details</p>
+
+    <button 
+      type="button"
+      class="btn btn-continue"
+      (click)="showForm = true; showThankYou=false;"
+    >
+    Continue
+  </button>
+  </div>
+
+  <!-- 
+  <div>
+    <span>Valid</span>
+    <pre>{{ myForm.valid | json }}</pre>
+
+  </div>
+  -->

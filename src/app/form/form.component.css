@@ -1,0 +1,83 @@
+
+form {
+    margin-top: 15rem;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 2rem;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.lbl {
+    font-size: 1.5rem;
+    color: var(--very-dark-violet);
+}
+
+.ipt {
+    min-height: 2.5rem;
+    font-family: var(--font-space-grotesk);
+    letter-spacing: .1rem;
+    padding: 1.2rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+
+    outline: none;
+    border: 1px solid var(--light-grayish-violet);
+}
+
+.ipt::placeholder {
+    color: var(--dark-grayish-violet);
+}
+
+.btn {
+    background-color: var(--very-dark-violet);
+    border: none;
+    color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1.8rem;
+    letter-spacing: .1rem;
+}
+
+
+.text-danger {
+    color: var(--text-danger);
+}
+
+
+.container-thank {
+    margin-top: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+}
+
+.container-thank .title {
+    letter-spacing: .4rem;
+}
+
+.container-thank .info {
+    color: var(--dark-grayish-violet);
+}
+
+.icon-complete {
+    margin-bottom: 2rem;
+}
+
+.btn-continue {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-top: 2rem;
+}

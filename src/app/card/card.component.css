@@ -6,6 +6,7 @@
   max-height: 25rem;
   position: relative;
   background-size: cover;
+  color: var(--white);
 }
 
 .card-back {
@@ -50,3 +51,4 @@
   display: flex;
   justify-content: space-between;
 }
+
