@@ -1,62 +1,105 @@
-  <div *ngIf="showForm">
-    <form [formGroup]="myForm" (ngSubmit)="onSave()">
-      <div class="form-group">
-        <label for="nombre" class="lbl">{{
-          "cardholder name" | uppercase
-        }}</label>
-        <input
-          type="text"
-          id="nombre"
-          formControlName="name"
-          class="card-name ipt"
-          placeholder="e.g. Christopher Quiroz"
-        />
+<div *ngIf="showForm">
+  <form [formGroup]="myForm" (ngSubmit)="onSave()">
+    <!-- CARD NAME -->
+    <div class="form-group">
+      <label for="nombre" class="lbl">{{
+        "cardholder name" | uppercase
+      }}</label>
+      <input
+        type="text"
+        id="nombre"
+        formControlName="name"
+        class="card-name ipt"
+        placeholder="e.g. Christopher Quiroz"
+      />
 
-        <span *ngIf="isValidField('name')" class="text-danger">
-          {{ getFieldError("name") }}
-        </span>
+      <span *ngIf="isValidField('name')" class="text-danger">
+        {{ getFieldError("name") }}
+      </span>
+    </div>
+
+    <!-- CARD NUMBER -->
+    <div class="form-group">
+      <label for="card-number" class="lbl">{{
+        "card number" | uppercase
+      }}</label>
+      <input
+        type="text"
+        id="card-number"
+        formControlName="number"
+        class="card-number ipt"
+        placeholder="e.g. 1234 5678 9123 0000"
+      />
+
+      <span *ngIf="isValidField('number')" class="text-danger">
+        {{ getFieldError("number") }}
+      </span>
+    </div>
+
+    <!-- CARD DATE -->
+    <div class="form-group container-date">
+      <div class="c-1">
+        <label for="card-year" class="lbl">{{
+          "exp. date (mm/yy)" | uppercase
+        }}</label>
+
+        <div class="card-date">
+          <input
+            type="text"
+            id="card-month"
+            formControlName="card_month"
+            class="card-month ipt"
+            placeholder="MM"
+          />
+          <input
+            type="text"
+            id="card-year"
+            formControlName="card_year"
+            class="card-year ipt"
+            placeholder="YY"
+          />
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="card-number" class="lbl">{{
-          "card number" | uppercase
-        }}</label>
+      <div class="c-2">
+        <label for="card_cvc" class="lbl">CVC</label>
         <input
           type="text"
-          id="card-number"
-          formControlName="number"
-          class="card-number ipt"
-          placeholder="e.g. 1234 5678 9123 0000"
+          id="card_cvc"
+          formControlName="card_cvc"
+          class="card-cvc ipt"
+          placeholder="e.g. 123"
         />
-
-        <span *ngIf="isValidField('number')" class="text-danger">
-          {{ getFieldError("number") }}
-        </span>
       </div>
 
-      <button type="submit" class="btn">Confirm</button>
-    </form>
-  </div>
+      <span *ngIf="isValidField('card_month') || isValidField('card_year') || isValidField('card_cvc')" class="text-danger">
+        {{ getFieldError('card_month') }}
+      </span>
+    </div>
 
-  <div *ngIf="showThankYou" class="container-thank">
-    <img
-      src="/assets/images/icon-complete.svg"
-      alt="Icons Complete"
-      class="icon-complete"
-    />
-    <h2 class="title">{{ "thank you!" | uppercase }}</h2>
-    <p class="info">We've added your card details</p>
+    <button type="submit" class="btn">Confirm</button>
+  </form>
+</div>
 
-    <button 
-      type="button"
-      class="btn btn-continue"
-      (click)="showForm = true; showThankYou=false;"
-    >
+<div *ngIf="showThankYou" class="container-thank">
+  <img
+    src="/assets/images/icon-complete.svg"
+    alt="Icons Complete"
+    class="icon-complete"
+  />
+  <h2 class="title">{{ "thank you!" | uppercase }}</h2>
+  <p class="info">We've added your card details</p>
+
+  <button
+    type="button"
+    class="btn btn-continue"
+    (click)="showForm = true; showThankYou = false"
+  >
     Continue
   </button>
-  </div>
+</div>
 
-  <!-- 
+<!-- 
   <div>
     <span>Valid</span>
     <pre>{{ myForm.valid | json }}</pre>

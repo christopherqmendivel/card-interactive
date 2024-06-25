@@ -1,24 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-const card = {
-  name: '',
-  number: 0
-}
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
   
   public myForm: FormGroup = this.fb.group( {
     name: ['', [ Validators.required, Validators.minLength(3) ]],
     number: ['', [
       Validators.required,
-      Validators.pattern('^[0-9]*$'), // Only number
-      Validators.minLength(16) ]], // Min  16 characters
+      Validators.pattern('^[0-9]*$'),
+      Validators.minLength(16) ]],
+    card_month: ['', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(2),
+      Validators.pattern('^[0-9]*$')
+    ]],
+    card_year: ['', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(2),
+      Validators.pattern('^[0-9]*$')
+    ]],
+    card_cvc: ['', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(3),
+      Validators.pattern('^[0-9]*$')
+    ]]
+     
   });
 
   public showForm: boolean = true;
@@ -26,15 +41,15 @@ export class FormComponent implements OnInit {
 
   constructor( private fb: FormBuilder ){}
 
-  ngOnInit(): void {
-    //this.myForm.reset(card)
-  }
+
 
   isValidField( field: string ): boolean | null {
     return this.myForm.controls[field].errors
       && this.myForm.controls[field].touched;
   } 
 
+
+  
   getFieldError( field: string ): string | null {
     const control = this.myForm.get(field);
 
@@ -42,13 +57,16 @@ export class FormComponent implements OnInit {
 
     const errors = control.errors;
 
-    for(const key of Object.keys(errors)) {
+    for(const key of Object.keys(errors)) { 
       switch( key ) {
         case 'required':
           return 'This field is required';
         
         case 'minlength':
-          return `Minimum  ${ errors['minlength'].requiredLength } characters.`
+          return `Minimum  ${ errors['minlength'].requiredLength } characters.`;
+
+        case 'maxlength':
+          return `Maximum ${errors['maxlength'].requiredLength} characters`;
 
         case 'pattern':
           if (errors['pattern']?.requiredPattern === '^[0-9]*$') {
@@ -61,9 +79,15 @@ export class FormComponent implements OnInit {
     return null;
   }
 
+
+  
+
   onSave(): void {
 
-    if( this.myForm.invalid) return;
+    if( this.myForm.invalid) {
+      this.myForm.markAllAsTouched();
+      return;
+    };
     //console.log(this.myForm.value);  
     this.showForm = false;
     this.showThankYou = true;
