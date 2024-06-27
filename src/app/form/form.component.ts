@@ -1,98 +1,136 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrl: './form.component.css',
 })
-export class FormComponent {
-  
-  public myForm: FormGroup = this.fb.group( {
-    name: ['', [ Validators.required, Validators.minLength(3) ]],
-    number: ['', [
-      Validators.required,
-      Validators.pattern('^[0-9]*$'),
-      Validators.minLength(16) ]],
-    card_month: ['', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(2),
-      Validators.pattern('^[0-9]*$')
-    ]],
-    card_year: ['', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(2),
-      Validators.pattern('^[0-9]*$')
-    ]],
-    card_cvc: ['', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(3),
-      Validators.pattern('^[0-9]*$')
-    ]]
-     
-  });
-
+export class FormComponent implements OnInit {
+  public myForm!: FormGroup;
   public showForm: boolean = true;
   public showThankYou: boolean = false;
 
-  constructor( private fb: FormBuilder ){}
+  @Output() cardInfoChange = new EventEmitter<{
+    name: string;
+    cardNumber: string;
+  }>();
 
+  constructor(private fb: FormBuilder) {}
 
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$')
+        ],
+      ],
+      number: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(16),
+          Validators.maxLength(16),
+        ],
+      ],
+      card_month: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(2),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+      card_year: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(2),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+      card_cvc: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(3),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+    });
 
-  isValidField( field: string ): boolean | null {
-    return this.myForm.controls[field].errors
-      && this.myForm.controls[field].touched;
-  } 
+    this.myForm.valueChanges.subscribe((value) => {
+      const name = value.name || '';
+      const cardNumber = this.formatCardNumber(value.number);
 
+      this.cardInfoChange.emit({ name, cardNumber });
+    });
+  }
 
-  
-  getFieldError( field: string ): string | null {
+  private formatCardNumber(cardnumber: string | null): string {
+    if (!cardnumber) return '';
+
+    const cleanedValue = cardnumber.replace(/\s/g, ''); // Delete spaces
+    const regex = /(\d{4})(?=\d)/g;
+    return cleanedValue.replace(regex, '$1 ').trim(); // Add spaces after every 4 digits
+  }
+
+  isValidField(field: string): boolean | null {
+    return (
+      this.myForm.controls[field].errors && this.myForm.controls[field].touched
+    );
+  }
+
+  getFieldError(field: string): string | null {
     const control = this.myForm.get(field);
 
     if (!control || !control.errors) return null;
 
     const errors = control.errors;
 
-    for(const key of Object.keys(errors)) { 
-      switch( key ) {
+    for (const key of Object.keys(errors)) {
+      switch (key) {
         case 'required':
           return 'This field is required';
-        
+
         case 'minlength':
-          return `Minimum  ${ errors['minlength'].requiredLength } characters.`;
+          return `Minimum ${errors['minlength'].requiredLength} characters.`;
 
         case 'maxlength':
           return `Maximum ${errors['maxlength'].requiredLength} characters`;
 
         case 'pattern':
-          if (errors['pattern']?.requiredPattern === '^[0-9]*$') {
-            return 'Only numbers are allowed';
-          } else if (errors['pattern']?.requiredPattern === '^[0-9]{16}$') {
-            return 'The field must be exactly 16 digits';
+          const requiredPattern = errors['pattern']?.requiredPattern;
+
+          if (requiredPattern === '^[0-9]*$') {
+            return 'Only numbers are allowed.';
+          } else if (requiredPattern === '^[0-9]{16}$') {
+            return 'The field must be exactly 16 digits.';
+          } else if (requiredPattern === '^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$') {
+            return 'Only letters allowed.';
           }
+          break;
       }
     }
     return null;
   }
 
-
-  
-
   onSave(): void {
-
-    if( this.myForm.invalid) {
+    if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
-    };
-    //console.log(this.myForm.value);  
+    }
+    //console.log(this.myForm.value);
     this.showForm = false;
     this.showThankYou = true;
-    
-    this.myForm.reset({});
 
+    this.myForm.reset({});
   }
 }

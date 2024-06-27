@@ -1,5 +1,9 @@
 
 <div class="container interactive-card">
-    <card></card>
-    <app-form class="form"></app-form>
-</div>
+    <card
+        [cardholderName]="cardholderName"
+        [cardNumber]="cardNumber"
+    >    
+    </card>
+    <app-form (cardInfoChange)="updateCardInfo($event)" class="form"></app-form>
+</div>  
