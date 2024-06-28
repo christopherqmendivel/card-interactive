@@ -12,10 +12,16 @@
 
       <p class="number-card">{{ cardNumber }}</p>
 
-      <p class="name-expire">
-        <span class="card-name">{{ cardholderName | uppercase }} </span>
-        <span class="card-expire">00/00</span>
-      </p>
+      <div class="card-foot">
+        <p class="name-expire">
+          <span class="card-name">{{ cardholderName | uppercase }} </span>
+        </p>
+  
+        <p class="card-expire">
+          <span class="card-month">{{ cardMonth }}</span>    
+          <span class="card-year">{{ cardYear }}</span>
+        </p>
+      </div>
     </div>
   </div>
 </div>

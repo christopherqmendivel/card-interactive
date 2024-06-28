@@ -9,6 +9,8 @@ export class CardComponent {
 
   @Input() cardholderName: string = '';
   @Input() cardNumber = '';
+  @Input() cardMonth = '';
+  @Input() cardYear = '';
  
   constructor() {}
 

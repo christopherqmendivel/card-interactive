@@ -11,7 +11,7 @@
         formControlName="name"
         class="card-name ipt"
         placeholder="e.g. Christopher Quiroz"
-        
+        maxlength="25"
       />
 
       <span *ngIf="isValidField('name')" class="text-danger">
@@ -30,6 +30,7 @@
         formControlName="number"
         class="card-number ipt"
         placeholder="e.g. 1234 5678 9123 0000"
+        maxlength="16"
       />
 
       <span *ngIf="isValidField('number')" class="text-danger">
@@ -51,6 +52,7 @@
             formControlName="card_month"
             class="card-month ipt"
             placeholder="MM"
+            maxlength="2"
           />
           <input
             type="text"
@@ -58,6 +60,7 @@
             formControlName="card_year"
             class="card-year ipt"
             placeholder="YY"
+            maxlength="2"
           />
         </div>
       </div>
@@ -70,6 +73,7 @@
           formControlName="card_cvc"
           class="card-cvc ipt"
           placeholder="e.g. 123"
+          maxlength="3"
         />
       </div>
 
@@ -94,7 +98,7 @@
   <button
     type="button"
     class="btn btn-continue"
-    (click)="showForm = true; showThankYou = false"
+    (click)="onContinue()"
   >
     Continue
   </button>

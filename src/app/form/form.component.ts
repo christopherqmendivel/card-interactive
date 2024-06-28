@@ -10,11 +10,18 @@ export class FormComponent implements OnInit {
   public myForm!: FormGroup;
   public showForm: boolean = true;
   public showThankYou: boolean = false;
+  public cardholderName: string = 'Christopher Quiroz'; 
+  public cardNumber: string = '0000 0000 0000 0000'; 
+  public cardMonth: string = '00'; 
+  public cardYear: string = '00';
 
   @Output() cardInfoChange = new EventEmitter<{
     name: string;
     cardNumber: string;
+    cardMonth: string;
+    cardYear: string;
   }>();
+  AppComponent: any;
 
   constructor(private fb: FormBuilder) {}
 
@@ -25,7 +32,9 @@ export class FormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.pattern('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$')
+          Validators.maxLength(25),
+          Validators.pattern('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$'),
+          
         ],
       ],
       number: [
@@ -69,8 +78,10 @@ export class FormComponent implements OnInit {
     this.myForm.valueChanges.subscribe((value) => {
       const name = value.name || '';
       const cardNumber = this.formatCardNumber(value.number);
+      const cardMonth = value.card_month || '';
+      const cardYear = value.card_year || '';
 
-      this.cardInfoChange.emit({ name, cardNumber });
+      this.cardInfoChange.emit({ name, cardNumber, cardMonth, cardYear });
     });
   }
 
@@ -127,10 +138,26 @@ export class FormComponent implements OnInit {
       this.myForm.markAllAsTouched();
       return;
     }
-    //console.log(this.myForm.value);
+    // Emitir cambios al componente Padre ( app.component )
     this.showForm = false;
     this.showThankYou = true;
-
-    this.myForm.reset({});
   }
+
+  onContinue(): void {
+    this.showForm = true;
+    this.showThankYou = false;
+    this.resetForm();
+  }
+
+  // Reset form
+  private resetForm(): void {
+   
+    this.myForm.reset({
+      name: this.cardholderName,
+      number: this.cardNumber,
+      card_month: this.cardMonth,
+      card_year: this.cardYear,
+     })
+  }
+  
 }
