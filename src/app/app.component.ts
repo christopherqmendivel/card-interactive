@@ -11,6 +11,7 @@ export class AppComponent {
   public cardNumber: string = '0000 0000 0000 0000';
   public cardMonth: string = '00';
   public cardYear: string = '00';
+  public cardCvc: string = '123';
 
   constructor() {}
 
@@ -18,7 +19,8 @@ export class AppComponent {
     { name: string;
       cardNumber: string,
       cardMonth: string,
-      cardYear: string
+      cardYear: string,
+      cardCvc: string
     }){
 
     if (cardInfo.name) {
@@ -35,6 +37,10 @@ export class AppComponent {
     if (cardInfo.cardYear) {
       this.cardYear = cardInfo.cardYear;
     }
+
+    if (cardInfo.cardCvc) {
+      this.cardCvc = cardInfo.cardCvc;
+    }
  
   }
 
@@ -50,5 +56,6 @@ export class AppComponent {
     this.cardNumber = '0000 0000 0000 0000';
     this.cardMonth = '00';
     this.cardYear = '00';
+    this.cardCvc = '123'
   }
 }

@@ -1,26 +1,45 @@
 <!-- CARD -->
 <div class="card">
-  <div class="card-back"></div>
 
+  <!-- CARD BACK -->
+  <div class="card-back">
+    <img
+      src="/assets/images/backgrounds/bg-card-back.png"
+      class="img-back"
+      alt="Card Back"
+    />
+    <span class="cvc">{{ cardCvc }}</span>
+  </div>
+
+  <!-- CARD FRONT -->
   <div class="card-front">
     <div class="data-card">
-      <img
-        src="/assets/images/card-logo.svg"
-        class="card-logo"
+      <div class="img2">
+        <img
+        src="/assets/images/backgrounds/bg-card-front.png"
+        class="img-front"
         alt="Card Logo"
       />
+      </div>
+      <div class="info-card">
+        <img
+          src="/assets/images/card-logo.svg"
+          class="card-logo"
+          alt="Card Logo"
+        />
 
-      <p class="number-card">{{ cardNumber }}</p>
+        <p class="number-card">{{ cardNumber }}</p>
 
-      <div class="card-foot">
-        <p class="name-expire">
-          <span class="card-name">{{ cardholderName | uppercase }} </span>
-        </p>
-  
-        <p class="card-expire">
-          <span class="card-month">{{ cardMonth }}</span>    
-          <span class="card-year">{{ cardYear }}</span>
-        </p>
+        <div class="card-foot">
+          <p class="name-expire">
+            <span class="card-name">{{ cardholderName | uppercase }} </span>
+          </p>
+
+          <p class="card-expire">
+            <span class="card-month">{{ cardMonth }}</span>
+            <span class="card-year">{{ cardYear }}</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>

@@ -8,9 +8,10 @@ import { Component, Input } from '@angular/core';
 export class CardComponent {
 
   @Input() cardholderName: string = '';
-  @Input() cardNumber = '';
-  @Input() cardMonth = '';
-  @Input() cardYear = '';
+  @Input() cardNumber: string = '';
+  @Input() cardMonth: string = '';
+  @Input() cardYear: string = '';
+  @Input() cardCvc: string = '';
  
   constructor() {}
 

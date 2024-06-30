@@ -1,10 +1,12 @@
 
 <div class="container interactive-card">
     <card
+        class="c-card"
         [cardholderName]="cardholderName"
         [cardNumber]="cardNumber"
         [cardMonth]="cardMonth"
         [cardYear]="cardYear"
+        [cardCvc]="cardCvc"
     >    
     </card>
     <app-form (cardInfoChange)="updateCardInfo($event)" class="form"></app-form>

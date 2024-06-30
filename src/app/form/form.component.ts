@@ -10,18 +10,15 @@ export class FormComponent implements OnInit {
   public myForm!: FormGroup;
   public showForm: boolean = true;
   public showThankYou: boolean = false;
-  public cardholderName: string = 'Christopher Quiroz'; 
-  public cardNumber: string = '0000 0000 0000 0000'; 
-  public cardMonth: string = '00'; 
-  public cardYear: string = '00';
+
 
   @Output() cardInfoChange = new EventEmitter<{
     name: string;
     cardNumber: string;
     cardMonth: string;
     cardYear: string;
+    cardCvc: string;
   }>();
-  AppComponent: any;
 
   constructor(private fb: FormBuilder) {}
 
@@ -80,8 +77,9 @@ export class FormComponent implements OnInit {
       const cardNumber = this.formatCardNumber(value.number);
       const cardMonth = value.card_month || '';
       const cardYear = value.card_year || '';
+      const cardCvc = value.card_cvc || '';
 
-      this.cardInfoChange.emit({ name, cardNumber, cardMonth, cardYear });
+      this.cardInfoChange.emit({ name, cardNumber, cardMonth, cardYear, cardCvc });
     });
   }
 
@@ -147,17 +145,21 @@ export class FormComponent implements OnInit {
     this.showForm = true;
     this.showThankYou = false;
     this.resetForm();
+    this.emitInitialValues();
   }
 
   // Reset form
   private resetForm(): void {
-   
-    this.myForm.reset({
-      name: this.cardholderName,
-      number: this.cardNumber,
-      card_month: this.cardMonth,
-      card_year: this.cardYear,
-     })
+    this.myForm.reset({})
   }
   
+  private emitInitialValues(): void {
+    this.cardInfoChange.emit({
+      name: 'Christopher Quiroz',
+      cardNumber: '0000 0000 0000 0000',
+      cardMonth: '00',
+      cardYear: '00',
+      cardCvc: '123'
+    });
+  }
 }

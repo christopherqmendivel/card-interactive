@@ -1,47 +1,74 @@
 /* CARDS */
-.card {
-  background-image: url(../../../public/assets/images/backgrounds/bg-main-mobile.png);
-  min-height: 20rem;
-  height: 24rem;
-  max-height: 25rem;
-  position: relative;
-  background-size: cover;
-  color: var(--white);
-}
 
-.card-back {
-  background-image: url(../../../public/assets/images/backgrounds/bg-card-back.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 4rem;
-  width: 75%;
-  height: 100%;
-  right: 2rem;
+
+.card {
+ color: var(--white);
+ position: relative;
+ padding-top: 1rem;
+
+ width: 75%;
+ margin: 0 auto;
+ 
 }
 
 .card-front {
-  background-image: url(../../../public/assets/images/backgrounds/bg-card-front.png);
-  background-size: contain;
-  background-repeat: no-repeat;
   position: absolute;
-  left: 2rem;
-  width: 75%;
-  height: 100%;
-  top: 13.5rem;
+  top: 65%;
+  display: flex;
 }
+
+.card-back {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 3rem;
+  width: 100%;
+
+  position: relative;
+  left: 3rem;
+}
+
+.card-back .img-back,
+.card-front .img-front {
+  width: 100%;
+  background-size: cover;
+}
+
+.cvc {
+  position: absolute;
+  bottom: 38%;
+  right: 4rem;
+  color: black;
+  font-size: 1.2rem;
+  color: white;
+  letter-spacing: 0.1rem;
+}
+
+
 
 .card-logo {
   width: 7rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .data-card {
+  position: relative;
+  right: 3rem;
+}
+
+
+
+.info-card {
+  position: absolute;
+  top: 0;
   padding: 2rem;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 1.4rem;
 }
 
 .number-card {
-    letter-spacing: .3rem;
+  letter-spacing: 0.3rem;
 }
 
 .name-expire {
@@ -51,11 +78,14 @@
   justify-content: space-between;
 }
 
-
 .card-foot {
   display: flex;
   justify-content: space-between;
-  padding-top: 2rem;
+
+  position: absolute;
+  width: 90%;
+  bottom: 0;
+  padding-bottom: 2rem;
 }
 
 .card-expire {
@@ -64,5 +94,5 @@
 }
 
 span.card-month:after {
-  content: '/';
+  content: "/";
 }
