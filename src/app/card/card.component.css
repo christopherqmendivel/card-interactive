@@ -1,26 +1,25 @@
 /* CARDS */
 
-
 .card {
- color: var(--white);
- position: relative;
- padding-top: 1rem;
+  color: var(--white);
+  position: relative;
+  padding-top: 1rem;
 
- width: 75%;
- margin: 0 auto;
- 
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .card-front {
   position: absolute;
-  top: 65%;
+  top: 54%;
   display: flex;
 }
 
 .card-back {
   display: flex;
   justify-content: flex-end;
-  padding-top: 3rem;
   width: 100%;
 
   position: relative;
@@ -31,8 +30,11 @@
 .card-front .img-front {
   width: 100%;
   background-size: cover;
+  max-width: 37rem;
 }
 
+
+/*
 .cvc {
   position: absolute;
   bottom: 38%;
@@ -41,9 +43,15 @@
   font-size: 1.2rem;
   color: white;
   letter-spacing: 0.1rem;
+}*/
+.card-back::after {
+  content: attr(data-cvc);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 14%;
+  font-size: 1.2rem;  
 }
-
-
 
 .card-logo {
   width: 7rem;
@@ -55,8 +63,6 @@
   right: 3rem;
 }
 
-
-
 .info-card {
   position: absolute;
   top: 0;
@@ -64,11 +70,10 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  font-size: 1.4rem;
 }
 
 .number-card {
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.2rem;
 }
 
 .name-expire {
@@ -95,4 +100,83 @@
 
 span.card-month:after {
   content: "/";
+}
+
+/* MEDIA QUERY */
+
+@media (min-width: 440px) {
+  .card {
+    width: 65%;
+  }
+
+  .card-front {
+    top: 54%;
+  }
+  .number-card {
+    letter-spacing: 0.3rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+  }
+  .card-foot {
+    padding-bottom: 0;
+    bottom: 10%;
+  }
+
+  .cvc {
+    bottom: 54%;
+    right: 13%;
+  }
+}
+
+@media (min-width: 720px) {
+  .card {
+    width: 40%;
+  }
+
+  .card-back .img-back,
+  .card-front .img-front {
+    min-width: 37rem;
+  }
+ 
+
+
+  .number-card  {
+    font-size: 2.2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .c-card {
+    width: 35%;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4rem;
+    position: absolute;
+    left: 55%;
+    width: 65%;
+  }
+  .card-front {
+    position: initial;
+    order: 1;
+  }
+
+
+
+  .info-card,
+  .card-month,
+  .name-expire,
+  .card-expire {
+    font-size: 1.3rem;
+  }
+
+  .card-back {
+    order: 2;
+    padding-top: 0;
+  }
+
 }

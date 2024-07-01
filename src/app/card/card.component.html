@@ -2,13 +2,13 @@
 <div class="card">
 
   <!-- CARD BACK -->
-  <div class="card-back">
+  <div class="card-back" [attr.data-cvc]="cardCvc">
     <img
       src="/assets/images/backgrounds/bg-card-back.png"
       class="img-back"
       alt="Card Back"
     />
-    <span class="cvc">{{ cardCvc }}</span>
+    <!-- <span class="cvc">{{ cardCvc }}</span> -->
   </div>
 
   <!-- CARD FRONT -->
