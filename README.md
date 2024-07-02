@@ -3,6 +3,9 @@
 ## Desktop
 ![DDesktop Image](public/assets/design/desktop-preview.jpg)
 
+## Mobile
+![Mobile Image](public/assets/design/mobile-design.jpg)
+
 # InteractiveCard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
