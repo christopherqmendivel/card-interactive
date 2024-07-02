@@ -79,7 +79,13 @@ export class FormComponent implements OnInit {
       const cardYear = value.card_year || '';
       const cardCvc = value.card_cvc || '';
 
-      this.cardInfoChange.emit({ name, cardNumber, cardMonth, cardYear, cardCvc });
+      this.cardInfoChange.emit({ 
+        name,
+        cardNumber,
+        cardMonth,
+        cardYear,
+        cardCvc
+      });
     });
   }
 
@@ -107,7 +113,7 @@ export class FormComponent implements OnInit {
     for (const key of Object.keys(errors)) {
       switch (key) {
         case 'required':
-          return 'This field is required';
+          return "Can't be blank";
 
         case 'minlength':
           return `Minimum ${errors['minlength'].requiredLength} characters.`;
@@ -119,9 +125,9 @@ export class FormComponent implements OnInit {
           const requiredPattern = errors['pattern']?.requiredPattern;
 
           if (requiredPattern === '^[0-9]*$') {
-            return 'Only numbers are allowed.';
+            return 'Wrong format, numbers only.';
           } else if (requiredPattern === '^[0-9]{16}$') {
-            return 'The field must be exactly 16 digits.';
+            return 'The field must be exactly 16 digits';
           } else if (requiredPattern === '^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$') {
             return 'Only letters allowed.';
           }

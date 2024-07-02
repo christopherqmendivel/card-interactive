@@ -10,6 +10,7 @@
         id="nombre"
         formControlName="name"
         class="card-name ipt"
+        [ngClass]="{ 'is-invalid': isValidField('name') }"
         placeholder="e.g. Christopher Quiroz"
         maxlength="25"
       />
@@ -29,6 +30,7 @@
         id="card-number"
         formControlName="number"
         class="card-number ipt"
+        [ngClass]="{ 'is-invalid': isValidField('number') }"
         placeholder="e.g. 1234 5678 9123 0000"
         maxlength="16"
       />
@@ -46,40 +48,57 @@
         }}</label>
 
         <div class="card-date">
-          <input
-            type="text"
-            id="card-month"
-            formControlName="card_month"
-            class="card-month ipt"
-            placeholder="MM"
-            maxlength="2"
-          />
-          <input
-            type="text"
-            id="card-year"
-            formControlName="card_year"
-            class="card-year ipt"
-            placeholder="YY"
-            maxlength="2"
-          />
+          <div class="ipt-group">
+            <input
+              type="text"
+              id="card-month"
+              formControlName="card_month"
+              class="card-month ipt"
+              [ngClass]="{ 'is-invalid': isValidField('card_month') }"
+              placeholder="MM"
+              maxlength="2"
+            />
+
+            <span *ngIf="isValidField('card_month')" class="text-danger">
+              {{ getFieldError("card_month") }}
+            </span>
+          </div>
+
+          <div class="ipt-group">
+            <input
+              type="text"
+              id="card-year"
+              formControlName="card_year"
+              class="card-year ipt"
+              [ngClass]="{ 'is-invalid': isValidField('card_year') }"
+              placeholder="YY"
+              maxlength="2"
+            />
+
+            <span *ngIf="isValidField('card_year')" class="text-danger">
+              {{ getFieldError("card_year") }}
+            </span>
+          </div>
         </div>
       </div>
 
       <div class="c-2">
         <label for="card_cvc" class="lbl">CVC</label>
-        <input
-          type="text"
-          id="card_cvc"
-          formControlName="card_cvc"
-          class="card-cvc ipt"
-          placeholder="e.g. 123"
-          maxlength="3"
-        />
+        <div class="ipt-group ipt-group-cvc">
+          <input
+            type="text"
+            id="card_cvc"
+            formControlName="card_cvc"
+            class="card-cvc ipt"
+            [ngClass]="{ 'is-invalid': isValidField('card_cvc') }"
+            placeholder="e.g. 123"
+            maxlength="3"
+          />
+        </div>
+        <span *ngIf="isValidField('card_cvc')" class="text-danger">
+          {{ getFieldError('card_cvc') }}
+        </span>
       </div>
-
-      <span *ngIf="isValidField('card_month') || isValidField('card_year') || isValidField('card_cvc')" class="text-danger">
-        {{ getFieldError('card_month') }}
-      </span>
     </div>
 
     <button type="submit" class="btn">Confirm</button>
@@ -95,11 +114,7 @@
   <h2 class="title">{{ "thank you!" | uppercase }}</h2>
   <p class="info">We've added your card details</p>
 
-  <button
-    type="button"
-    class="btn btn-continue"
-    (click)="onContinue()"
-  >
+  <button type="button" class="btn btn-continue" (click)="onContinue()">
     Continue
   </button>
 </div>
